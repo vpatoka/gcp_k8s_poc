@@ -51,6 +51,12 @@ variable "deletion_protection" {
   default     = false
 }
 
+variable "docker_repository" {
+  description = "Docker Image Repo"
+  type        = string
+  default     = "my-app-repository"
+}
+
 variable "argocd_namespace" {
   description = "k8s namespace for ArgoCD"
   type        = string

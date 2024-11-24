@@ -72,6 +72,16 @@ resource "google_container_node_pool" "primary_nodes" {
   }
 }
 
+# Docker Registry (docker repo)
+#
+resource "google_artifact_registry_repository" "my-repo" {
+  location      = var.region
+  repository_id = var.docker_repository
+  description   = "Applications docker repository"
+  format        = "DOCKER"
+}
+
+
 # ArgoCD
 # 
 # Can be deployed ONLY after k8s cluster deployment
