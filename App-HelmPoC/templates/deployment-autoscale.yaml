@@ -1,3 +1,8 @@
+#---------------------------------------------------------------------
+# Helm template for k8s to deploy simple web app
+#
+# Created by Vlad Patoka, who is looking for a job
+#---------------------------------------------------------------------
 apiVersion: apps/v1
 kind: Deployment
 metadata:

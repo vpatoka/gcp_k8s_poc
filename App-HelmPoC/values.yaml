@@ -12,3 +12,6 @@ memThreshold: 80
 
 app_port: 80
 trg_port: 80
+
+argo_port: 8080
+https_argo_port: 8443

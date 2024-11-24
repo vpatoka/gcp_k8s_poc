@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name     : my_web_app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name     : in-cluster
+    namespace: my_web_app
+  source:
+    path   : "App-HelmPoC"
+    repoURL: "git@github.com:vpatoka/gcp_k8s_poc.git"
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - values.yaml
+      parameters:
+      - name: "container.image"
+        value: vpatoka/my_web_app:latest
+
+  project: default
+  syncPolicy:
+    automated:
+      prune   : true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true         

@@ -1,3 +1,8 @@
+#---------------------------------------------------------------------
+# TF variable file for my PoC project
+#
+# Created by Vlad Patoka, who is looking for a job
+#---------------------------------------------------------------------
 variable "project_id" {
   description = "The GCP project ID"
   type        = string
@@ -37,12 +42,24 @@ variable "node_machine_type" {
 variable "disk_size" {
   description = "Disk size for the cluster nodes"
   type        = number
-  default     = 10
+  default     = 20
 }
 
 variable "deletion_protection" {
   description = "Flag to allow to delete entire cluster using tf destroy command"
   type        = bool
   default     = false
+}
+
+variable "argocd_namespace" {
+  description = "k8s namespace for ArgoCD"
+  type        = string
+  default     = "argocd"
+}
+
+variable "argo_chart_version" {
+  description = "ArgoCD version"
+  type        = string
+  default     = "7.0.0"
 }
 

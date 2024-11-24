@@ -1,8 +1,34 @@
+#---------------------------------------------------------------------
+# TF main file for my PoC project
+#
+# Created by Vlad Patoka, who is looking for a job
+#---------------------------------------------------------------------
 provider "google" {
   project = var.project_id
   region  = var.region
 }
 
+data "google_client_config" "default" {
+}
+
+provider "kubernetes" {
+  host                   = google_container_cluster.primary.endpoint
+  token                  = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = google_container_cluster.primary.endpoint
+    token                  = data.google_client_config.default.access_token
+    cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
+  }
+  debug = "true"
+}
+
+
+# Kubernetes Cluster
+#
 resource "google_container_cluster" "primary" {
   name     = var.cluster_name
   location = var.region
@@ -18,6 +44,10 @@ resource "google_container_cluster" "primary" {
     ]
   }
 
+  lifecycle {
+    ignore_changes = all
+  }
+
   network    = "default"
   subnetwork = "default"
 }
@@ -28,6 +58,10 @@ resource "google_container_node_pool" "primary_nodes" {
   name       = "primary-node-pool"
   node_count = var.node_count
 
+  lifecycle {
+    ignore_changes = all
+  }
+
   node_config {
     preemptible  = true
     machine_type = var.node_machine_type
@@ -36,4 +70,24 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/cloud-platform",
     ]
   }
+}
+
+# ArgoCD
+# 
+# Can be deployed ONLY after k8s cluster deployment
+resource "helm_release" "argocd" {
+  name             = "argocd"
+  repository       = "https://argoproj.github.io/argo-helm" # Official Chart Repo
+  chart            = "argo-cd"                              # Official Chart Name
+  namespace        = var.argocd_namespace
+  version          = var.argo_chart_version
+  create_namespace = true
+  values           = [file("argocd.yaml")]
+
+  #set {
+  #  name  = "server.service.type"
+  #  value = "LoadBalancer"
+  #}
+
+  depends_on = [google_container_cluster.primary, google_container_node_pool.primary_nodes]
 }
