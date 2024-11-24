@@ -49,14 +49,14 @@ jobs:
 
     - name: Auth access to Docker repo
       uses: RafikFarhad/push-to-gcr-github-action@v5-rc1
-        with:
-          #gcloud_service_key: ${{ secrets.GCP_SA_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
-          registry: gcr.io
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          image_name: ${{ env.IMAGE_NAME }}
-          image_tag: latest,v1
-          dockerfile: ./Dockerfile
-          context: ./
+      with:
+        #gcloud_service_key: ${{ secrets.GCP_SA_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
+        registry: gcr.io
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        image_name: ${{ env.IMAGE_NAME }}
+        image_tag: latest,v1
+        dockerfile: ./Dockerfile
+        context: ./
 
     - name: Push Docker image to Google Container Registry
       run:
