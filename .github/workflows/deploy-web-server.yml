@@ -43,7 +43,10 @@ jobs:
       run:
         docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest .
 
-    - name: Push Docker image to Google Container Registry
+    - name: Auth access to Docker repo
       run:
         gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+    - name: Push Docker image to Google Container Registry
+      run:
         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
