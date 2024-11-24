@@ -28,6 +28,7 @@ cd Scripts
 ./get-gcp-credentials
 ./sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
 ./install-helm.sh
+```
 
 ### 2. Build Kubernetes Cluster with Terraform
 Navigate to the IaC directory and apply the Terraform configuration to build the Kubernetes cluster.
@@ -36,6 +37,7 @@ Navigate to the IaC directory and apply the Terraform configuration to build the
 cd ../IaC
 terraform init
 terraform apply
+```
 
 ### 3. Deploy Web Application with Helm
 Navigate to the root directory and use Helm to deploy the web application with HPA autoscaling.
@@ -43,6 +45,7 @@ Navigate to the root directory and use Helm to deploy the web application with H
 ```sh
 cd ../
 helm install my-web-app ./App-HelmPoC/
+```
 
 Directory Details
 
