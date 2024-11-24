@@ -14,6 +14,7 @@ on:
 env:
   PROJECT: PoC
   IMAGE_NAME: my_web_app
+  REGION: us-central1
 
 jobs:
   build:
@@ -44,4 +45,5 @@ jobs:
 
     - name: Push Docker image to Google Container Registry
       run:
+        gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
