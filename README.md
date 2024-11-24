@@ -50,18 +50,24 @@ helm install my-web-app ./App-HelmPoC/
 Directory Details
 
 Scripts
+```
 install-helm.sh: Script to install Helm.
 get-gcp-credentials.sh: Script to authenticate and get GCP credentials.
+```
 
 IaC
+```
 main.tf: Terraform configuration to build a Kubernetes cluster on GCP.
 variables.tf: Terraform variables file.
 output.tf: Show some output values from TF
+```
 
 App-HelmPOC
+```
 Chart.yaml: Helm chart metadata.
 values.yaml: Default configuration values for the Helm chart.
 templates/: Directory containing Kubernetes resource templates.
+```
 
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
