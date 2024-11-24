@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-app-service
+  labels:
+    app: {{ .Release.Name }}
+    env: poc
+    owner: VladPatoka
+spec:
+  selector:
+    app: {{ .Release.Name }} # Selecting pods with those labels
+  ports:
+    - name: {{ .Release.Name }}-app-listener
+      protocol: TCP
+      port: {{ .Values.app_port }}
+      targetPort: {{ .Values.trg_port }}
+  type: LoadBalancer

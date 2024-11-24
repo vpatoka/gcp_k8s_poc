@@ -1,0 +1,14 @@
+# Default values for my Helm App deployment
+
+container:
+  image: nginx:latest
+  port: 80
+
+minReplicas: 2
+maxReplicas: 5
+
+cpuThreshold: 70
+memThreshold: 80
+
+app_port: 80
+trg_port: 80
