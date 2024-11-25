@@ -10,11 +10,12 @@ spec:
     name     : in-cluster
     namespace: argocd
   source:
-    path   : "app_deployment/applications"
-    repoURL: "git@github.com:vpatoka/gcp_k8s_poc.git"
-    targetRevision: HEAD
+    repoURL       : "${repoURL}"
+    path          : "${path}"
+    targetRevision: "${targetRevision}"
   project: default
   syncPolicy:
     automated:
       prune   : true
       selfHeal: true
+      

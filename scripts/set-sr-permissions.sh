@@ -17,3 +17,14 @@ gcloud projects add-iam-policy-binding ${PRJ_ID} \
 gcloud projects add-iam-policy-binding ${PRJ_ID} \
   --member="serviceAccount:poc-account@${PRJ_ID}.iam.gserviceaccount.com" \
   --role="roles/container.developer"
+
+# Create a custom role with the necessary permission artifactregistry.repositories.createOnPush
+gcloud iam roles create artifactRegistryPushRole \
+    --project $PRJ_ID \
+    --title "Artifact Registry Push Role" \
+    --permissions artifactregistry.repositories.createOnPush
+
+# Grant the custom role to the service account
+gcloud projects add-iam-policy-binding $PRJ_ID \
+    --member "serviceAccount:poc-account@${PRJ_ID}.iam.gserviceaccount.com" \
+    --role projects/$PRJ_ID/roles/artifactRegistryPushRole
