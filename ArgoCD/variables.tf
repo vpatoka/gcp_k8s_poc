@@ -72,7 +72,7 @@ variable "argo_chart_version" {
 variable "git_source_repoURL" {
   description = "GitSource repoURL to Track and deploy to k8s by ROOT Application"
   type        = string
-  default     = "git@github.com:vpatoka/gcp_k8s_poc.git"
+  default     = "https://github.com/vpatoka/gcp_k8s_poc.git"
 }
 
 variable "git_source_path" {

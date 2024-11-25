@@ -12,7 +12,7 @@ spec:
     namespace: argocd
   source:
     path   : "app_deployment/applications"
-    repoURL: "git@github.com:vpatoka/gcp_k8s_poc.git"
+    repoURL: "https://github.com/vpatoka/gcp_k8s_poc.git"
     targetRevision: HEAD
   project: default
   syncPolicy:
