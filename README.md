@@ -7,8 +7,9 @@ This repository contains scripts, infrastructure as code (IaC), and Helm charts 
 
 ## Repository Structure
 
-- **Scripts**: Shell scripts to install Helm and get GCP credentials.
-- **IaC**: Terraform code to build a Kubernetes cluster on GCP.
+- **Scripts**: Shell scripts to support (Helm installation, GCP credentials, Special role for service account)
+- **ArgoCD**: Terraform code to build a Kubernetes cluster on GCP and deploy ArgoCD to it
+- **app_deployment**: Chart for app deployemnt using ArgoCD
 - **App-HelmPOC**: Helm chart and templates to deploy a simple web application with HPA autoscaling.
 
 ## Prerequisites
@@ -19,7 +20,7 @@ This repository contains scripts, infrastructure as code (IaC), and Helm charts 
 
 ## Getting Started
 
-### 1. Install Helm and Get GCP Credentials
+### 1. Install Helm, Get GCP Credentials and create role for service account
 
 Navigate to the `Scripts` directory and run the shell scripts to install Helm and get GCP credentials.
 
@@ -30,10 +31,10 @@ cd Scripts
 ./install-helm.sh
 
 ### 2. Build Kubernetes Cluster with Terraform
-Navigate to the IaC directory and apply the Terraform configuration to build the Kubernetes cluster.
+Navigate to the ArgoCD directory and apply the Terraform configuration to build the Kubernetes cluster, ArgoCD and Application for ArgoCD
 
 ```sh
-cd ../IaC
+cd ../ArgoCD
 terraform init
 terraform apply
 
@@ -47,13 +48,11 @@ helm install my-web-app ./App-HelmPoC/
 Directory Details
 
 Scripts
+```sh
 install-helm.sh: Script to install Helm.
 get-gcp-credentials.sh: Script to authenticate and get GCP credentials.
+set-sr-permissions.sh: Script to set permission for GCP service account to allow to work with Containers Repo
 
-IaC
-main.tf: Terraform configuration to build a Kubernetes cluster on GCP.
-variables.tf: Terraform variables file.
-output.tf: Show some output values from TF
 
 App-HelmPOC
 Chart.yaml: Helm chart metadata.
@@ -62,10 +61,9 @@ templates/: Directory containing Kubernetes resource templates.
 
 ### NOTE:
 If TF stack to destroy Helm resource, here is workaround:
-```
+```sh
 terraform state rm helm_release.argocd
 terraform destroy
-```
 
 
 Contributing
