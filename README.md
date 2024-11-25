@@ -29,6 +29,7 @@ cd Scripts
 ./get-gcp-credentials
 ./sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
 ./install-helm.sh
+```
 
 ### 2. Build Kubernetes Cluster with Terraform
 Navigate to the ArgoCD directory and apply the Terraform configuration to build the Kubernetes cluster, ArgoCD and Application for ArgoCD
@@ -37,6 +38,7 @@ Navigate to the ArgoCD directory and apply the Terraform configuration to build 
 cd ../ArgoCD
 terraform init
 terraform apply
+```
 
 ### 3. Deploy Web Application with Helm
 Navigate to the root directory and use Helm to deploy the web application with HPA autoscaling.
@@ -44,6 +46,7 @@ Navigate to the root directory and use Helm to deploy the web application with H
 ```sh
 cd ../
 helm install my-web-app ./App-HelmPoC/
+```
 
 Directory Details
 
@@ -52,19 +55,21 @@ Scripts
 install-helm.sh: Script to install Helm.
 get-gcp-credentials.sh: Script to authenticate and get GCP credentials.
 set-sr-permissions.sh: Script to set permission for GCP service account to allow to work with Containers Repo
-
+```
 
 App-HelmPOC
+```sh
 Chart.yaml: Helm chart metadata.
 values.yaml: Default configuration values for the Helm chart.
 templates/: Directory containing Kubernetes resource templates.
+```
 
 ### NOTE:
 If TF stack to destroy Helm resource, here is workaround:
 ```sh
 terraform state rm helm_release.argocd
 terraform destroy
-
+```
 
 Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
