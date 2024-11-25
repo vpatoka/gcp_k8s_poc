@@ -20,25 +20,25 @@ spec:
 
 # Service for ArgoCD
 #
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: argocd-server
-  namespace: argocd
-  labels:
-    {{ .Release.Name }}.kubernetes.io/name: argocd-server
-    {{ .Release.Name }}.kubernetes.io/part-of: argocd
-spec:
-  selector:
-    {{ .Release.Name }}.kubernetes.io/name: argocd-server
-  ports:
-    - name: http
-      port: 80
-      targetPort: {{ .Values.argo_port }}
-
-    - name: https
-      port: 443
-      targetPort: {{ .Values.https_argo_port }}
-
-  type: LoadBalancer
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: argocd-server
+#  namespace: argocd
+#  labels:
+#    {{ .Release.Name }}.kubernetes.io/name: argocd-server
+#    {{ .Release.Name }}.kubernetes.io/part-of: argocd
+#spec:
+#  selector:
+#    {{ .Release.Name }}.kubernetes.io/name: argocd-server
+#  ports:
+#    - name: http
+#      port: 80
+#      targetPort: {{ .Values.argo_port }}
+#
+#    - name: https
+#      port: 443
+#      targetPort: {{ .Values.https_argo_port }}
+#
+#  type: LoadBalancer

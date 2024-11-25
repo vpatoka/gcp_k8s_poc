@@ -11,4 +11,5 @@ else
   export REGION="$3"   # TBD check
 fi
 
+# Create kubeconfig
 gcloud container clusters get-credentials $CLUSTER_NAME --region $REGION --project $PRJ_ID

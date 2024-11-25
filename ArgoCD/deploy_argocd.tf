@@ -28,10 +28,6 @@ provider "helm" {
 }
 
 provider "kubernetes" {
-  #host                   = module.k8s.kubernetes_cluster_url
-  #token                  = data.google_client_config.default.access_token
-  #cluster_ca_certificate = module.k8s.kubernetes_cluster_ca_certificate
-  #insecure_skip_verify   = true
 }
 
 

@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ .Release.Name }}  # ^-- Service will look for those PODS Labels 
     spec:
       containers:
       - name: {{ .Release.Name }}-app-container

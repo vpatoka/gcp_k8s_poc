@@ -20,8 +20,8 @@ resource "helm_release" "argocd" {
   values           = [file("${path.module}/argocd.yaml")]
   timeout          = "3600" # changed from 1200
 
-  #set {
-  #  name  = "server.service.type"
-  #  value = "LoadBalancer"
-  #}
+  set {
+    name  = "server.service.type"
+    value = "LoadBalancer"
+  }
 }
