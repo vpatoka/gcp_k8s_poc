@@ -9,6 +9,7 @@ metadata:
   name: {{ .Release.Name }}-deployemnt-autoscaling-app
   labels:
     app: {{ .Release.Name }}-deployemnt-app
+    env: poc
     owner: VladPatoka
 spec:
   selector:
