@@ -13,7 +13,7 @@ on:
 
 env:
   PROJECT: PoC
-  IMAGE_NAME: my_web_app
+  IMAGE_NAME: my-web-app
   REGION: us-central1
 
 jobs:
